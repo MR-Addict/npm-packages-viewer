@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  min-height: 100vh;
+  min-height: 100svh;
+  font-family: sans-serif;
+
+  @apply px-4 md:px-48 py-7 flex text-gray-800;
+}
