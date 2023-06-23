@@ -19,12 +19,20 @@ async function parseFile(file: File | null) {
   const devDependencies = project.devDependencies;
   let data: ProjectType = { name: project.name, dependencies: [] };
   if (dependencies) {
-    const temp = Object.keys(dependencies).map((key) => ({ name: key, version: dependencies[key], dev: false }));
-    data.dependencies.push(...temp);
+    Object.keys(dependencies).forEach((name) => {
+      const dev = false;
+      const exact = !dependencies[name].startsWith("^");
+      const version = dependencies[name].replace("^", "");
+      data.dependencies.push({ name, dev, exact, version });
+    });
   }
   if (devDependencies) {
-    const temp = Object.keys(devDependencies).map((key) => ({ name: key, version: devDependencies[key], dev: true }));
-    data.dependencies.push(...temp);
+    Object.keys(devDependencies).forEach((name) => {
+      const dev = true;
+      const exact = !devDependencies[name].startsWith("^");
+      const version = devDependencies[name].replace("^", "");
+      data.dependencies.push({ name, dev, exact, version });
+    });
   }
 
   return data;

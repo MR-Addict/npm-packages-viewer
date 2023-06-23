@@ -3,7 +3,8 @@ import z from "zod";
 const Dependency = z.object({
   name: z.string(),
   version: z.string(),
-  dev: z.boolean()
+  dev: z.boolean(),
+  exact: z.boolean()
 });
 
 const Project = z.object({
