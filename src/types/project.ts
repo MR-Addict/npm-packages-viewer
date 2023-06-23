@@ -1,13 +1,18 @@
 import z from "zod";
 
-const Project = z.object({
+const Dependency = z.object({
   name: z.string(),
   version: z.string(),
-  devDependencies: z.record(z.string()).optional(),
-  dependencies: z.record(z.string()).optional()
+  dev: z.boolean()
+});
+
+const Project = z.object({
+  name: z.string(),
+  dependencies: z.array(Dependency)
 });
 
 type ProjectType = z.TypeOf<typeof Project>;
+type DependencyType = z.TypeOf<typeof Dependency>;
 
-export { Project };
-export type { ProjectType };
+export { Project, Dependency };
+export type { ProjectType, DependencyType };

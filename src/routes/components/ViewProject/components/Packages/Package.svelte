@@ -1,13 +1,15 @@
 <script lang="ts">
   import CopyButton from "./CopyButton.svelte";
 
-  export let dev: boolean;
-  export let name: string;
-  export let version: string;
+  import type { DependencyType } from "$types/project";
+
+  export let dependency: DependencyType;
+
+  const { name, version, dev } = dependency;
 
   let latest: string | null = null;
 
-  async function fetchPackge() {
+  async function fetchPackage() {
     const url = `https://registry.npmjs.org/${name}/latest`;
     const res = await fetch(url).then((res) => res.json());
     latest = res.version;
@@ -25,7 +27,7 @@
   <div class="px-3 p-3 rounded-b-lg border-t border-t-gray-300">
     <p class="w-fit relative">
       <span>{version}</span>
-      {#await fetchPackge() then latest}
+      {#await fetchPackage() then latest}
         {#if latest !== version}
           <span class="absolute -right-1 -top-1 translate-x-full text-xs rounded-lg bg-green-600 text-white px-1">
             {latest}

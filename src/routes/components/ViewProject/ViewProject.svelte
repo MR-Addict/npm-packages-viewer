@@ -12,7 +12,7 @@
     </section>
   {:else}
     <section class="w-full flex-1 flex items-center justify-center">
-      <div class="w-fit flex flex-row justify-center flex-wrap">
+      <div class="flex flex-row justify-center flex-wrap">
         <span>Upload your</span>
         <span class="mx-1 font-semibold text-red-600">package.json</span>
         <span>by clicking button right bottom</span>

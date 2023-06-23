@@ -8,5 +8,5 @@
 </script>
 
 <header class="flex flex-row justify-between">
-  <h1 class="text-2xl font-semibold capitalize">{project.name}</h1>
+  <h1 class="text-xl font-semibold capitalize">{project.name}</h1>
 </header>
