@@ -5,7 +5,7 @@
 
   function handleUpdate(e: Event) {
     const files = (e.target as HTMLInputElement).files;
-    if (files && files[0].name === "package.json" && files[0].type === "application/json") file.set(files[0]);
+    if (files && files[0].type === "application/json") file.set(files[0]);
   }
 </script>
 

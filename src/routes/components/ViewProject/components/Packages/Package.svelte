@@ -7,7 +7,7 @@
 
   const { name, version, dev } = dependency;
 
-  let latest: string | null = null;
+  let latest: string | undefined = undefined;
 
   async function fetchPackage() {
     const url = `https://registry.npmjs.org/${name}/latest`;
@@ -28,10 +28,8 @@
     <p class="w-fit relative">
       <span>{version}</span>
       {#await fetchPackage() then latest}
-        {#if latest !== version}
-          <span class="absolute -right-1 -top-1 translate-x-full text-xs rounded-lg bg-green-600 text-white px-1">
-            {latest}
-          </span>
+        {#if latest && latest !== version}
+          <span class="latest">{latest}</span>
         {/if}
       {/await}
     </p>
@@ -42,5 +40,8 @@
   .wrapper {
     box-shadow: 0 0 5px #80808040;
     @apply h-full border border-gray-300 rounded-lg;
+  }
+  .latest {
+    @apply absolute whitespace-nowrap -right-1 -top-1 translate-x-full text-xs rounded-lg bg-green-600 text-white px-1;
   }
 </style>
