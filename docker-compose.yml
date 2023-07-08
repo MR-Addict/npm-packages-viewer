@@ -1,0 +1,7 @@
+version: "3"
+services:
+  packages:
+    image: mraddict063/packages
+    restart: unless-stopped
+    ports:
+      - 8011:80
