@@ -1,5 +1,15 @@
 import z from "zod";
 
+const RawProject = z
+  .object({
+    name: z.string(),
+    devDependencies: z.record(z.string()).optional(),
+    dependencies: z.record(z.string()).optional()
+  })
+  .refine((value) => value.dependencies !== undefined || value.devDependencies !== undefined, {
+    message: "Your packages are empty"
+  });
+
 const Dependency = z.object({
   name: z.string(),
   version: z.string(),
@@ -13,7 +23,8 @@ const Project = z.object({
 });
 
 type ProjectType = z.TypeOf<typeof Project>;
+type RawProjectType = z.TypeOf<typeof RawProject>;
 type DependencyType = z.TypeOf<typeof Dependency>;
 
-export { Project, Dependency };
-export type { ProjectType, DependencyType };
+export { Project, RawProject, Dependency };
+export type { ProjectType, DependencyType, RawProjectType };

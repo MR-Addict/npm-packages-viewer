@@ -1,11 +1,11 @@
 <script lang="ts">
-  import file from "$stores/file";
-
   import MdFileUpload from "svelte-icons/md/MdFileUpload.svelte";
+
+  export let file: File | null;
 
   function handleUpdate(e: Event) {
     const files = (e.target as HTMLInputElement).files;
-    if (files && files[0].type === "application/json") file.set(files[0]);
+    if (files && files.length > 0 && files[0].type === "application/json") file = files[0];
   }
 </script>
 

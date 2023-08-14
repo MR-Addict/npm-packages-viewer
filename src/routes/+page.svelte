@@ -1,7 +1,25 @@
 <script lang="ts">
+  import parsePackage from "$lib/parsePackage";
+  import type { ProjectType } from "$types/project";
+
   import UploadFile from "./components/UploadFile/UploadFile.svelte";
   import ViewProject from "./components/ViewProject/ViewProject.svelte";
+
+  let file: File | null;
+  let project: ProjectType | null;
+
+  $: file && parsePackage(file).then((res) => (project = res));
 </script>
 
-<UploadFile />
-<ViewProject />
+<UploadFile bind:file />
+{#if project}
+  <ViewProject {project} />
+{:else}
+  <section class="w-full flex-1 flex items-center justify-center">
+    <div class="flex flex-row justify-center flex-wrap">
+      <span>Upload your</span>
+      <span class="mx-1 font-semibold text-red-600">package.json</span>
+      <span>by clicking button right bottom</span>
+    </div>
+  </section>
+{/if}
