@@ -16,7 +16,7 @@ export default async function parsePackage(file: File) {
       const dev = false;
       const exact = !dependencies[name].startsWith("^");
       const version = dependencies[name].replace("^", "");
-      project.dependencies.push({ name, dev, exact, version });
+      project.dependencies.push({ name, dev, exact, version, latest: null });
     });
   }
 
@@ -25,7 +25,7 @@ export default async function parsePackage(file: File) {
       const dev = true;
       const exact = !devDependencies[name].startsWith("^");
       const version = devDependencies[name].replace("^", "");
-      project.dependencies.push({ name, dev, exact, version });
+      project.dependencies.push({ name, dev, exact, version, latest: null });
     });
   }
 

@@ -2,11 +2,11 @@
 
 ## 1. What's it for?
 
-Find you outdated npm packages latest stable version.
+Find npm packages latest stable version information.
 
 ## 2. How to development
 
-Dev:
+Development:
 
 ```sh
 npm run dev

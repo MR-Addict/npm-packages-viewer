@@ -3,8 +3,8 @@
 
   export let file: File | null;
 
-  function handleUpdate(e: Event) {
-    const files = (e.target as HTMLInputElement).files;
+  function handleUpdate(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
     if (files && files.length > 0 && files[0].type === "application/json") file = files[0];
   }
 </script>

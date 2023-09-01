@@ -13,6 +13,7 @@ const RawProject = z
 const Dependency = z.object({
   name: z.string(),
   version: z.string(),
+  latest: z.union([z.string(), z.null()]),
   dev: z.boolean(),
   exact: z.boolean()
 });
