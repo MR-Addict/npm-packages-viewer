@@ -45,7 +45,7 @@
     <div class="flex flex-row items-center px-3 py-2 bg-gray-100 rounded-t-lg">
       <p class="relative">
         <span>{name}</span>
-        <span class="dev">{dev ? "dev" : "prod"}</span>
+        <span class="label" data-dev={dev}>{dev ? "dev" : "prod"}</span>
       </p>
       {#if latest}
         {@const message = `npm install ${name}@${latest} ${dev ? "-D" : ""}${exact ? "--save-exact" : ""}`}
@@ -75,8 +75,14 @@
   .latest {
     @apply whitespace-nowrap text-xs rounded-lg bg-green-600 text-white px-1;
   }
-  .dev {
+  .label {
     @apply absolute -right-1 translate-x-full;
-    @apply text-xs border border-gray-400 px-1 rounded-lg text-gray-600;
+    @apply text-xs px-1.5 rounded-lg text-white;
+  }
+  .label[data-dev="true"] {
+    @apply bg-purple-600;
+  }
+  .label[data-dev="false"] {
+    @apply bg-yellow-600;
   }
 </style>

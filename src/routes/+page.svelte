@@ -7,7 +7,10 @@
 
   let file: File | null;
 
-  $: file && parsePackage(file).then((res) => project.set(res));
+  $: {
+    if (file) parsePackage(file).then((res) => project.set(res));
+    else project.set(null);
+  }
 </script>
 
 <UploadFile bind:file />

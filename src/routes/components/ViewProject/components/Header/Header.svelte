@@ -26,7 +26,7 @@
     <div class="h-3.5"><FaAlignLeft /></div>
     <h1 class="text-lg font-semibold capitalize">{$project.name}</h1>
 
-    <div class="ml-auto">
+    <div class="ml-auto space-x-2">
       {#if devs.length}
         <button type="button" title="Copy all updatable devDpendencies" on:click={() => copy(devs, true)}>
           Development
@@ -34,7 +34,9 @@
       {/if}
 
       {#if prods.length}
-        <button type="button" title="Copy all updatable dependencies" on:click={() => copy(prods, false)}>Prod</button>
+        <button type="button" title="Copy all updatable dependencies" on:click={() => copy(prods, false)}>
+          Production
+        </button>
       {/if}
     </div>
   </header>
