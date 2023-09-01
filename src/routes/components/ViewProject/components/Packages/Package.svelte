@@ -77,12 +77,6 @@
   }
   .label {
     @apply absolute -right-1 translate-x-full;
-    @apply text-xs px-1.5 rounded-lg text-white;
-  }
-  .label[data-dev="true"] {
-    @apply bg-purple-600;
-  }
-  .label[data-dev="false"] {
-    @apply bg-yellow-600;
+    @apply text-xs px-1.5 rounded-lg border border-gray-300;
   }
 </style>
