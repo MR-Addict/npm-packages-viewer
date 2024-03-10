@@ -5,6 +5,7 @@
 
   let devs: DependencyType[] = [];
   let prods: DependencyType[] = [];
+  let active = { dev: false, prod: false };
 
   $: {
     if ($project) {
@@ -15,8 +16,13 @@
 
   function copy(dependencies: DependencyType[], dev: boolean) {
     if (dependencies.length > 0) {
+      if (dev) active.dev = true;
+      else active.prod = true;
+
       const versions = dependencies.map((item) => `${item.name}@${item.latest}`).join(" ");
-      navigator.clipboard.writeText(`npm install ${versions}${dev ? " -D" : ""}`);
+      navigator.clipboard.writeText(`npm i ${versions}${dev ? " -D" : ""}`);
+
+      setTimeout(() => (active = { dev: false, prod: false }), 1000);
     }
   }
 </script>
@@ -28,13 +34,23 @@
 
     <div class="ml-auto space-x-2">
       {#if devs.length}
-        <button type="button" title="Copy all updatable devDpendencies" on:click={() => copy(devs, true)}>
+        <button
+          type="button"
+          class:active={active.dev}
+          title="Copy all updatable devDpendencies"
+          on:click={() => copy(devs, true)}
+        >
           Development
         </button>
       {/if}
 
       {#if prods.length}
-        <button type="button" title="Copy all updatable dependencies" on:click={() => copy(prods, false)}>
+        <button
+          type="button"
+          class:active={active.prod}
+          title="Copy all updatable dependencies"
+          on:click={() => copy(prods, false)}
+        >
           Production
         </button>
       {/if}
@@ -44,9 +60,18 @@
 
 <style lang="postcss">
   button {
-    @apply text-sm py-1 px-4 rounded-full bg-black/10;
+    @apply relative text-sm py-1 px-4 rounded-full bg-black/10;
   }
   button:hover {
     @apply bg-black/20 duration-300;
+  }
+
+  button::before {
+    content: "Copied";
+    @apply left-1/2 transform -translate-x-1/2;
+    @apply opacity-0 invisible duration-300 absolute -top-5 text-xs;
+  }
+  button.active:hover::before {
+    @apply opacity-100 visible;
   }
 </style>

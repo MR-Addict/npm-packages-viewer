@@ -24,6 +24,6 @@
     @apply z-10;
   }
   :is(button, label) {
-    @apply cursor-pointer bg-cyan-600 text-white w-12 fixed right-5 md:right-10 bottom-10 p-3 rounded-full;
+    @apply cursor-pointer bg-cyan-600 text-white w-12 fixed right-5 sm:right-10 bottom-10 p-3 rounded-full;
   }
 </style>
